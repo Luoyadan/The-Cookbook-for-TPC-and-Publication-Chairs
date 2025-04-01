@@ -146,7 +146,7 @@ for note in tqdm(notes):
 
         email_address = ET.SubElement(author, 'email_address')
 
-        email = profile.content.get('preferred_email', 'N/A')
+        email = profile.content.get('preferredEmail', 'N/A')
 
         # handle for those who did not set preferred emails
         if email == 'N/A':
