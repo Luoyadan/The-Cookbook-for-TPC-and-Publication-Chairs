@@ -24,6 +24,7 @@ client = openreview.api.OpenReviewClient(
 # 'acmmm.org/ACMMM/2024/Track/Demo'
 venue_id = 'acmmm.org/ACMMM/2024/Conference'
 venue_group = client.get_group(venue_id)
+
 submission_name = venue_group.content['submission_name']['value']
 track_name = 'main_appeal'  # BNI, GC, Demo
 
@@ -31,6 +32,8 @@ track_name = 'main_appeal'  # BNI, GC, Demo
 notes = client.get_all_notes(
     invitation=f'{venue_id}/-/{submission_name}')
 
+# **new** for 2025 version
+client.impersonate(venue_id)
 
 # notes = client.get_all_notes(content={'venueid': venue_id})
 
@@ -52,8 +55,8 @@ source = ET.SubElement(parent_data, 'source')
 source.text = ''
 
 # filter the newly accepted papers
-newly_id = [2935, 1166]
-notes = [note for note in notes if note.number in newly_id]
+# newly_id = [2935, 1166]
+# notes = [note for note in notes if note.number in newly_id]
 
 for note in tqdm(notes):
     paper = ET.SubElement(new_root, 'paper')
